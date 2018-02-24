@@ -1,0 +1,28 @@
+.a {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #eee;
+  overflow: hidden;
+}
+.a .item {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: red;
+  margin: 1px;
+}
+.b {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #eee;
+  overflow: hidden;
+}
+.b .item {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: #eee;
+  margin: 1px;
+}
