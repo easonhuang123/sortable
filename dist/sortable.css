@@ -1,28 +1,39 @@
-.a {
+.container {
   display: inline-block;
   width: 300px;
   height: 300px;
   border: 2px solid #eee;
   overflow: hidden;
+  font-size: 0;
 }
-.a .item {
+.container .item {
   display: inline-block;
   width: 60px;
   height: 60px;
+  margin: 5px;
+  font-size: 12px;
+}
+.red {
   background-color: red;
-  margin: 1px;
 }
-.b {
-  display: inline-block;
-  width: 300px;
-  height: 300px;
-  border: 2px solid #eee;
-  overflow: hidden;
+.blue {
+  background-color: blue;
 }
-.b .item {
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  background-color: #eee;
-  margin: 1px;
+.yellow {
+  background-color: yellow;
+}
+.green {
+  background-color: green;
+}
+.black {
+  background-color: black;
+}
+.pink {
+  background-color: pink;
+}
+.purple {
+  background-color: purple;
+}
+.gray {
+  background-color: gray;
 }

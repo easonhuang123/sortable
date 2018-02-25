@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({8:[function(require,module,exports) {
+})({6:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -101,7 +101,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],6:[function(require,module,exports) {
+},{}],5:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -132,52 +132,76 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":8}],4:[function(require,module,exports) {
+},{"./bundle-url":6}],4:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":6}],2:[function(require,module,exports) {
+},{"_css_loader":5}],2:[function(require,module,exports) {
 'use strict';
 
 require('./main.less');
 
 var dragged = void 0;
-// document.addEventListener('drag', (event)=>{
-// })
 
+// 开始拖拽
 document.addEventListener('dragstart', function (event) {
     dragged = event.target;
 });
 
-document.addEventListener('dragend', function (event) {});
-
+// 拖拽到目标区域中时一直触发
 document.addEventListener('dragover', function (event) {
     event.preventDefault();
-});
-
-// document.addEventListener('dragenter', (event)=>{
-//     console.log('dragenter' + event.target.className)
-// })
-
-// document.addEventListener('dragleave', (event)=>{
-//     console.log('dragleave' + event.target.className)
-// })
-
-document.addEventListener('drop', function (event) {
-    if (event.target.className === 'a' || event.target.className === 'b') {
+    if (event.dataTransfer) {
+        event.dataTransfer.dropEffect = 'move';
+    }
+    // 可拖拽区域
+    if (event.target.classList.contains('container')) {
         dragged.parentNode.removeChild(dragged);
         event.target.appendChild(dragged);
-    } else if (dragged.nextElementSibling === event.target) {
-        dragged.parentNode.removeChild(dragged);
-        event.target.parentNode.insertBefore(dragged, event.target.nextElementSibling);
-    } else {
-        dragged.parentNode.removeChild(dragged);
-        event.target.parentNode.insertBefore(dragged, event.target);
+    } else if (event.target !== dragged && event.target.classList.contains('item')) {
+        // 目标元素是拖拽元素的下一个元素
+        if (dragged.nextElementSibling === event.target) {
+            dragged.parentNode.removeChild(dragged);
+            event.target.parentNode.insertBefore(dragged, event.target.nextElementSibling);
+            // 目标元素是别的可拖拽可排序元素
+        } else {
+            dragged.parentNode.removeChild(dragged);
+            event.target.parentNode.insertBefore(dragged, event.target);
+        }
     }
 });
-},{"./main.less":4}],9:[function(require,module,exports) {
+
+// 进入目标区域中时触发
+document.addEventListener('dragenter', function (event) {
+    // 可拖拽区域
+    if (event.target.classList.contains('container')) {
+        dragged.parentNode.removeChild(dragged);
+        event.target.appendChild(dragged);
+    } else if (event.target !== dragged && event.target.classList.contains('item')) {
+        // 目标元素是拖拽元素的下一个元素
+        if (dragged.nextElementSibling === event.target) {
+            dragged.parentNode.removeChild(dragged);
+            event.target.parentNode.insertBefore(dragged, event.target.nextElementSibling);
+            // 目标元素是别的可拖拽可排序元素
+        } else {
+            dragged.parentNode.removeChild(dragged);
+            event.target.parentNode.insertBefore(dragged, event.target);
+        }
+    }
+});
+
+// 离开目标区域中时触发
+document.addEventListener('dragleave', function (event) {
+    // console.log('dragleave' + event.target.className)
+});
+
+// 结束拖拽时，事件指向目标
+document.addEventListener('drop', function (event) {
+    console.log('finished');
+});
+},{"./main.less":4}],15:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -199,7 +223,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58187' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63407' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -300,5 +324,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[9,2])
+},{}]},{},[15,2])
 //# sourceMappingURL=/dist/sortable.map
